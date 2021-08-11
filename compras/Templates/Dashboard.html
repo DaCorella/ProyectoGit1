@@ -13,11 +13,15 @@
 <body>
 <div class="container p-3 my-3 bg-primary text-white">
 <h1>Menu Principal</h1>
-    <ol><li><a class="btn btn-success" href="{% url 'consulta_cliente' %}">
+    <ol>
+        <li><a class="btn btn-success" href="{% url 'consulta_cliente' %}">
         <i class="bi bi-person-plus"></i> Clientes
 </a></li>
     <li><a class="btn btn-success" href="{% url 'consulta_producto' %}">
         <i class="bi bi-person-plus"></i> Productos
+</a></li>
+        <li><a class="btn btn-success" href="{% url 'consulta_factura' %}">
+        <i class="bi bi-person-plus"></i> Factura
 </a></li>
     </ol>
 

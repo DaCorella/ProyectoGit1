@@ -22,8 +22,6 @@ def crear_cliente(request):
             formulario.save()
         return redirect('consulta_cliente')
 
-    # return render(request, "<html><head></head><body>Registro Ingresado Correctamente</body></html>", contexto)
-
 
 def crear_detalle(request):
     formulario = DetalleForms()
@@ -130,14 +128,13 @@ def cargar_listado_factura(request):
     articulo1 = Factura.objects.all()
     return render(request, "listado_factura.html", {'articulos': articulo1})
 
-
 def crear_factura(request):
     if request.method == 'GET':
         formulario = FacturaForms()
         contexto = {
             'formulario': formulario
         }
-        return render(request, "crear_producto.html", contexto)
+        return render(request, "crear_factura.html", contexto)
     else:
         formulario = FacturaForms(request.POST)
         contexto = {
@@ -146,25 +143,23 @@ def crear_factura(request):
         # print(formulario)
         if formulario.is_valid():
             formulario.save()
-        return redirect('consulta_producto')
-
+        return redirect('consulta_factura')
 
 def eliminar_factura(request, id):
     articulo1 = Factura.objects.get(id=id)
     articulo1.delete()
     return redirect('consulta_factura')
 
-
 def editar_factura(request, id):
     articulo1 = Factura.objects.get(id=id)
     if request.method == 'GET':
-        form = ProductoForms(instance=articulo1)
+        form = FacturaForms(instance=articulo1)
         contexto = {
                        'formulario': form
                        }
-        return render(request, "crear_producto.html", contexto)
+        return render(request, "crear_factura.html", contexto)
     else:
-        form = ProductoForms(request.POST, instance=articulo1)
+        form = FacturaForms(request.POST, instance=articulo1)
         contexto = {
             'formulario': form
         }

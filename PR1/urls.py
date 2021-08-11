@@ -31,5 +31,9 @@ urlpatterns = [
     path('editar_producto/<int:id>/', editar_producto, name="editar_producto"),
     path('buscar_usuario/', buscar_usuario, name="buscar_usuario"),
     path('', cargar_index, name="index"),
+    path('cargar_listado_factura/', cargar_listado_factura, name="consulta_factura"),
+    path('crear_factura/', crear_factura, name="crear_factura"),
+    path('eliminar_factura/<int:id>/', eliminar_factura, name="eliminar_factura"),
+    path('editar_factura/<int:id>/', editar_factura, name="editar_factura"),
 
 ]
