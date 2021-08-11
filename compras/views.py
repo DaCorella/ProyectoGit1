@@ -172,3 +172,6 @@ def editar_factura(request, id):
             form.save()
             return redirect('consulta_factura')
     return render(request, "crear_factura.html", contexto)
+
+def mivista1():
+    return "hola mundo"
