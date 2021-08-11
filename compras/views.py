@@ -175,3 +175,6 @@ def editar_factura(request, id):
 
 def mivista1():
     return "hola mundo"
+
+def mivista2():
+    return "hola mundo"
