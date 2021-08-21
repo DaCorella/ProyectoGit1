@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from compras.forms import ClienteForms,ProductoForms,DetalleForms,FacturaForms
 # Create your views here.
-from compras.models import Cliente,Producto,Factura
+from compras.models import Cliente,Producto,Factura,Detalle_factura
 from django.http import HttpResponse
 
 
@@ -21,16 +21,6 @@ def crear_cliente(request):
         if formulario.is_valid():
             formulario.save()
         return redirect('consulta_cliente')
-
-
-def crear_detalle(request):
-    formulario = DetalleForms()
-    contexto = {
-        'formulario2':formulario
-    }
-
-    return render(request,"detalle_factura.html",contexto)
-
 
 def cargar_listado_cliente(request):
     cliente1 = Cliente.objects.all()
@@ -61,8 +51,8 @@ def eliminar_cliente(request, id):
     return redirect('consulta_cliente')
 
 def cargar_listado_productos(request):
-    articulo1 = Producto.objects.all()
-    return render(request, "listado_producto.html", {'articulos': articulo1})
+    factura1 = Producto.objects.all()
+    return render(request, "listado_producto.html", {'factura': factura1})
 
 
 def crear_producto(request):
@@ -125,8 +115,8 @@ def cargar_index(request):
 ####Prueba
 
 def cargar_listado_factura(request):
-    articulo1 = Factura.objects.all()
-    return render(request, "listado_factura.html", {'articulos': articulo1})
+    factura1 = Factura.objects.all()
+    return render(request, "listado_factura.html", {'facturas': factura1})
 
 def crear_factura(request):
     if request.method == 'GET':
@@ -173,3 +163,51 @@ def mivista1():
 
 def mivista2():
     return "hola mundo"
+
+#Detalle factura xd
+
+def cargar_listado_detalle(request):
+    detalle1 = Detalle_factura.objects.all()
+    return render(request, "listado_detalle.html", {'detalle': detalle1})
+
+def crear_detalle(request):
+    if request.method == 'GET':
+        formulario = DetalleForms()
+        contexto = {
+            'formulario': formulario
+        }
+        return render(request, "crear_detalle.html", contexto)
+    else:
+        formulario = DetalleForms(request.POST)
+        contexto = {
+            'form': formulario
+        }
+        # print(formulario)
+        if formulario.is_valid():
+            formulario.save()
+        return redirect('consulta_detalle')
+
+def eliminar_detalle(request, id):
+    articulo1 = Detalle_factura.objects.get(id=id)
+    articulo1.delete()
+    return redirect('consulta_detalle')
+
+def editar_detalle(request, id):
+    articulo1 = Detalle_factura.objects.get(id=id)
+    if request.method == 'GET':
+        form = DetalleForms(instance=articulo1)
+        contexto = {
+                       'formulario': form
+                       }
+        return render(request, "crear_detalle.html", contexto)
+    else:
+        form = DetalleForms(request.POST, instance=articulo1)
+        contexto = {
+            'formulario': form
+        }
+        if form.is_valid():
+            form.save()
+            return redirect('consulta_detalle')
+    return render(request, "crear_detalle.html", contexto)
+
+

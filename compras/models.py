@@ -6,7 +6,7 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=100)
     email = models.CharField(max_length=200)
 
-    def _str_(self):
+    def __str__(self):
         return "{}  -> {}  -> {}".format(self.nombres,self.apellido,self.email)
 
 
@@ -15,7 +15,7 @@ class Producto(models.Model):
     nombre_producto = models.CharField(max_length=100)
     precio = models.FloatField()
 
-    def _str_(self):
+    def __str__(self):
         return " {} ".format(self.nombre_producto)
 
 
@@ -25,7 +25,7 @@ class Factura(models.Model):
     valor_factura = models.FloatField()
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
 
-    def _str_(self):
+    def __str__(self):
         return "{} -> {} -> {}".format(self.codigo_factura, self.valor_factura, self.cliente.nombres)
 
 class Detalle_factura(models.Model):
@@ -34,5 +34,5 @@ class Detalle_factura(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     valor_items = models.FloatField()
 
-    def _str_(self):
+    def __str__(self):
         return "{} -> {} ".format(self.factura, self.valor_items)

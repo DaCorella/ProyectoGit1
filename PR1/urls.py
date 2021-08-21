@@ -15,13 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from compras.views import crear_cliente,crear_detalle,crear_producto,cargar_listado_cliente,editar_cliente,eliminar_cliente,cargar_listado_productos,eliminar_producto,editar_producto,buscar_usuario,cargar_index,cargar_listado_factura,crear_factura,eliminar_factura,editar_factura
+from compras.views import crear_cliente,crear_producto,cargar_listado_cliente,editar_cliente,eliminar_cliente,cargar_listado_productos,eliminar_producto,editar_producto,buscar_usuario,cargar_index,cargar_listado_factura,crear_factura,eliminar_factura,editar_factura,cargar_listado_detalle,crear_detalle,eliminar_detalle,editar_detalle
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('crear_cliente/', crear_cliente,name="crear_cliente"),
-    path('crear_detalle/', crear_detalle,name="crear_detalle"),
     path('consulta_cliente/', cargar_listado_cliente, name="consulta_cliente"),
     path('editar_cliente/<int:id>/', editar_cliente, name="editar_cliente"),
     path('eliminar_cliente/<int:id>/', eliminar_cliente, name="eliminar_cliente"),
@@ -35,5 +34,10 @@ urlpatterns = [
     path('crear_factura/', crear_factura, name="crear_factura"),
     path('eliminar_factura/<int:id>/', eliminar_factura, name="eliminar_factura"),
     path('editar_factura/<int:id>/', editar_factura, name="editar_factura"),
+    path('cargar_listado_detalle/', cargar_listado_detalle, name="consulta_detalle"),
+    path('crear_detalle/', crear_detalle, name="crear_detalle"),
+    path('eliminar_detalle/<int:id>/', eliminar_detalle, name="eliminar_detalle"),
+    path('editar_detalle/<int:id>/', editar_detalle, name="editar_detalle"),
+
 
 ]
